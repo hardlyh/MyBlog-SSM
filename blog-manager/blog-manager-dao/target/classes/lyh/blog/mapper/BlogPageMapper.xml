@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lyh.blog.mapper.BlogPageMapper">
+  <resultMap id="BaseResultMap" type="lyh.blog.pojo.BlogPage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="page_title" jdbcType="VARCHAR" property="pageTitle" />
+    <result column="page_html_url" jdbcType="VARCHAR" property="pageHtmlUrl" />
+    <result column="page_viewing_count" jdbcType="SMALLINT" property="pageViewingCount" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="page_tag" jdbcType="VARCHAR" property="pageTag" />
+    <result column="page_is_private" jdbcType="TINYINT" property="pageIsPrivate" />
+    <result column="page_imgurl" jdbcType="VARCHAR" property="pageImgurl" />
+    <result column="page_description" jdbcType="VARCHAR" property="pageDescription" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, page_title, page_html_url, page_viewing_count, gmt_create, gmt_modified, page_tag, 
+    page_is_private, page_imgurl, page_description
+  </sql>
+  <select id="selectByExample" parameterType="lyh.blog.pojo.BlogPageQuery" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_page
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_page
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="lyh.blog.pojo.BlogPageQuery">
+    delete from blog_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="lyh.blog.pojo.BlogPage">
+  	<selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+  		select last_insert_id()
+  	</selectKey>
+    insert into blog_page (id, page_title, page_html_url, 
+      page_viewing_count, gmt_create, gmt_modified, 
+      page_tag, page_is_private, page_imgurl, 
+      page_description)
+    values (#{id,jdbcType=INTEGER}, #{pageTitle,jdbcType=VARCHAR}, #{pageHtmlUrl,jdbcType=VARCHAR}, 
+      #{pageViewingCount,jdbcType=SMALLINT}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, 
+      #{pageTag,jdbcType=VARCHAR}, #{pageIsPrivate,jdbcType=TINYINT}, #{pageImgurl,jdbcType=VARCHAR}, 
+      #{pageDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="lyh.blog.pojo.BlogPage">
+    insert into blog_page
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pageTitle != null">
+        page_title,
+      </if>
+      <if test="pageHtmlUrl != null">
+        page_html_url,
+      </if>
+      <if test="pageViewingCount != null">
+        page_viewing_count,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="pageTag != null">
+        page_tag,
+      </if>
+      <if test="pageIsPrivate != null">
+        page_is_private,
+      </if>
+      <if test="pageImgurl != null">
+        page_imgurl,
+      </if>
+      <if test="pageDescription != null">
+        page_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pageTitle != null">
+        #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pageHtmlUrl != null">
+        #{pageHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageViewingCount != null">
+        #{pageViewingCount,jdbcType=SMALLINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pageTag != null">
+        #{pageTag,jdbcType=VARCHAR},
+      </if>
+      <if test="pageIsPrivate != null">
+        #{pageIsPrivate,jdbcType=TINYINT},
+      </if>
+      <if test="pageImgurl != null">
+        #{pageImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageDescription != null">
+        #{pageDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="lyh.blog.pojo.BlogPageQuery" resultType="java.lang.Long">
+    select count(*) from blog_page
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update blog_page
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pageTitle != null">
+        page_title = #{record.pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pageHtmlUrl != null">
+        page_html_url = #{record.pageHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pageViewingCount != null">
+        page_viewing_count = #{record.pageViewingCount,jdbcType=SMALLINT},
+      </if>
+      <if test="record.gmtCreate != null">
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtModified != null">
+        gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pageTag != null">
+        page_tag = #{record.pageTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pageIsPrivate != null">
+        page_is_private = #{record.pageIsPrivate,jdbcType=TINYINT},
+      </if>
+      <if test="record.pageImgurl != null">
+        page_imgurl = #{record.pageImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pageDescription != null">
+        page_description = #{record.pageDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update blog_page
+    set id = #{record.id,jdbcType=INTEGER},
+      page_title = #{record.pageTitle,jdbcType=VARCHAR},
+      page_html_url = #{record.pageHtmlUrl,jdbcType=VARCHAR},
+      page_viewing_count = #{record.pageViewingCount,jdbcType=SMALLINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{record.gmtModified,jdbcType=TIMESTAMP},
+      page_tag = #{record.pageTag,jdbcType=VARCHAR},
+      page_is_private = #{record.pageIsPrivate,jdbcType=TINYINT},
+      page_imgurl = #{record.pageImgurl,jdbcType=VARCHAR},
+      page_description = #{record.pageDescription,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="lyh.blog.pojo.BlogPage">
+    update blog_page
+    <set>
+      <if test="pageTitle != null">
+        page_title = #{pageTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pageHtmlUrl != null">
+        page_html_url = #{pageHtmlUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageViewingCount != null">
+        page_viewing_count = #{pageViewingCount,jdbcType=SMALLINT},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pageTag != null">
+        page_tag = #{pageTag,jdbcType=VARCHAR},
+      </if>
+      <if test="pageIsPrivate != null">
+        page_is_private = #{pageIsPrivate,jdbcType=TINYINT},
+      </if>
+      <if test="pageImgurl != null">
+        page_imgurl = #{pageImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="pageDescription != null">
+        page_description = #{pageDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lyh.blog.pojo.BlogPage">
+    update blog_page
+    set page_title = #{pageTitle,jdbcType=VARCHAR},
+      page_html_url = #{pageHtmlUrl,jdbcType=VARCHAR},
+      page_viewing_count = #{pageViewingCount,jdbcType=SMALLINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      page_tag = #{pageTag,jdbcType=VARCHAR},
+      page_is_private = #{pageIsPrivate,jdbcType=TINYINT},
+      page_imgurl = #{pageImgurl,jdbcType=VARCHAR},
+      page_description = #{pageDescription,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	<context:property-placeholder location="classpath:resource.properties" />
+	
+	<context:component-scan base-package="lyh.blog.controller" />
+	<mvc:annotation-driven />
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 配置资源映射 -->
+	<mvc:resources location="/assets/" mapping="/assets/**"/>
+	<mvc:resources location="/dist/" mapping="/dist/**"/>
+
+	
+	<!-- dubbo -->
+	<dubbo:application name="e3-blog-web"/>
+	<dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>
+	<dubbo:reference interface="lyh.blog.service.ArticleService" id="articleService" />
+	<dubbo:reference interface="lyh.blog.service.CategoryService" id="categoryService" />
+	<dubbo:reference interface="lyh.blog.service.ProfileService" id="profileService" />
+	<dubbo:reference interface="lyh.blog.service.UserService" id="userService" />
+	<!-- 配置多媒体解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"/>
+		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="5242880" />
+	</bean>
+	
+	
+	<!-- shiro 配置 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 注入安全管理器对象 -->
+		<property name="securityManager" ref="securityManager"/>
+		<!-- 注入相关页面访问URL -->
+		<property name="loginUrl" value="/admin/login.html"/>
+		<property name="successUrl" value="/admin/index.html"/>
+		<property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+		<!--注入URL拦截规则 -->
+		<!-- anon 都可以访问 perms["staff-list"] 是否有staff-list权限 authc 是否登录 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/assets/** = anon
+				/dist/** = anon
+				/page_base_staff.action = perms["staff-list"]
+				/admin/login = anon
+				/admin/logout = logout
+				/admin/** = authc
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="bosRealm" class="lyh.blog.realm.BOSRealm"></bean>
+	
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="bosRealm"/>
+	</bean>
+	
+</beans>
