@@ -8,8 +8,10 @@
 </head>
 <body>
 </body>
+<script src="assets/js/jquery.min.js"></script>
 
 <script type="text/javascript">
-window.location.href="/web/indexAndInfor.do"; 
+$.post('/web/countWebView.do');
+window.location.href="/web/indexAndInfor.do";
 </script>
 </html>

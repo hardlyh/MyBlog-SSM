@@ -3,6 +3,7 @@ package lyh.blog.controller;
 import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,9 @@ public class ProfileController {
 
     @Autowired
     private ProfileService profileService;
+    
+    @Value("${qiniuUrl}")
+    private String qiniuUrl;
 
     @RequestMapping("/admin/getProfile")
     public String getProfileById(Model model, Byte id, Integer promptT) {
@@ -47,7 +51,7 @@ public class ProfileController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            blogMyprofile.setHeadPortraitUrl(key);
+            blogMyprofile.setHeadPortraitUrl(qiniuUrl + "/" + key);
         }
         profileService.updateProfile(blogMyprofile);
         // promptT 显示提示操作成功窗口标志

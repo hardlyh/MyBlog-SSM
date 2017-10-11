@@ -28,13 +28,13 @@
 </style>
 
 <body>
-	<!-- WRAPPER --><div id="wrapper">
-	<!-- NAVBAR -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-	<!-- END NAVBAR -->
-	<!-- LEFT SIDEBAR -->
-	<div id="sidebar-nav" class="sidebar">
-	</div>
+	   <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top"> <%@ include file="nav.jsp"%> </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <%@ include file="siderbar-nav.jsp"%>
+    </div>
 	<!-- END LEFT SIDEBAR -->
 	<!-- MAIN -->
 	<div class="main">
@@ -45,7 +45,7 @@
 				<div class="panel panel-headline">
 					<div class="panel-heading">
 						<h3 class="panel-title">统计数据</h3>
-						<p class="panel-subtitle">Period: 2017.5.18 -</p>
+						<p class="panel-subtitle">Period: </p>
 					</div>
 					<div class="panel-body">
 						<div class="row">

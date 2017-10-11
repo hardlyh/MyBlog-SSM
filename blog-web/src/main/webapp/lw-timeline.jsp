@@ -23,49 +23,78 @@
   <meta name="msapplication-TileColor" content="#0e90d2">
   <link rel="stylesheet" href="assets/css/amazeui.min.css">
   <link rel="stylesheet" href="assets/css/app.css">
+  <style type="text/css">
+   li{
+        list-style:none;
+        line-height:30px;
+   }
+  </style>
 </head>
 
 <body id="blog-article-sidebar">
-<!-- nav start -->
-	<%@include file="nav.jsp" %>
+<!-- header start -->
+ <%@include file="nav.jsp"%> 
 <!-- nav end -->
 <hr>
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
-    <div class="am-u-sm-12">
-        <h1 class="blog-text-center">-- 存档 --</h1>
-         
-       
-        <div class="timeline-year">
-    		    <br>
-                <ul>
-                <c:forEach items="${map }" var="m">
-                <h3>${m.key }月</h3>
-                <hr>
-	               <c:forEach items="${m.value }" var="p2">
-		                <li>
-		                    <span class="am-u-sm-4 am-u-md-2 timeline-span">${p2.time }</span>
-		                    <span class="am-u-sm-8 am-u-md-6"><a href="${p2.htmlUrl }.jsp">${p2.title }(${p2.pageview })</a></span>
-		                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">${p2.tag }</span>
-		                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">lyh2016</span>
-		                </li>
-	                </c:forEach>
- 				 </c:forEach>
-                </ul>
-       
+    <div class="am-u-md-8 am-u-sm-12">
+      <article class="am-article blog-article-p">
+        <div class="am-article-hd">
+          <h1 class="am-article-title blog-text-center">文章存档</h1>
+          <p class="am-article-meta blog-text-center">
+              <span><a href="#" class="blog-color">article &nbsp;</a></span>
+              <span><a href="#">@myself &nbsp;</a></span>
+          </p>
+          <ul>
+             <li>
+                 <span class="am-u-sm-4 am-u-md-2 timeline-span"><b>Time</b></span>
+                 <span class="am-u-sm-8 am-u-md-6"><a href="#" ><b>Title</b></a></span>
+                 <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only"><b>Tag</b></span>  
+                 <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only"><b>View</b></span>
+              </li>
+          </ul>
+          <br>
+          <hr>
+          <ul id="ul_clone">
+              <div style="display:none">
+                 <li id="li_clone">
+                    <span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/18</span>
+                    <span class="am-u-sm-8 am-u-md-6"><a href="#" name="title">君埋泉下泥销骨，我寄人间雪满头</a></span>
+                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only" name="tag">lyh</span>  
+                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only" name="proview">ss</span>
+                  </li>
+              </div>
+          </ul>
+        </div>        
+        <div class="am-article-bd">
+        </p>
         </div>
-      
+      </article>
+        
+        <div class="am-g blog-article-widget blog-article-margin">
+          <div class="am-u-lg-4 am-u-md-5 am-u-sm-7 am-u-sm-centered blog-text-center">
+            <span class="am-icon-tags"> &nbsp;</span><a href="#">命中含笑m</a>
+            <hr>
+          </div>
+        </div>
+
+    
+
+        
+
+        <hr>
     </div>
 
-
+   
+     <%@include file="left.jsp" %>
 </div>
 <!-- content end -->
 
+
  <footer class="blog-footer">
- 	<%@include file="foot.jsp" %>
+   <%@include file="foot.jsp"%>
   </footer>
-
-
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="assets/js/jquery.min.js"></script>
@@ -78,9 +107,22 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!-- <script src="assets/js/app.js"></script> -->
 <script type="text/javascript">
-	$("#timeline").addClass("am-active");
-	
-	
-	</script>
+    $("#pageList").addClass("am-active");
+    
+    $.post('/web/timelineArticle.do',function(data){
+        if(data!=null){
+            for(var i=0;i<data.length;i++){
+                var li = $("#li_clone").clone(false);
+                $(li).find(".timeline-span").text(data[i].gmtModified);
+                $(li).find("a[name='title']").text(data[i].pageTitle);
+            //  $(li).find("a[name='title']").attr('href',data[i].pageHtmlUrl);
+                $(li).find("span[name='tag']").text(data[i].pageTag);
+                $(li).find("span[name='proview']").text(data[i].pageViewingCount);
+                $("#ul_clone").append(li);
+            }
+        }
+    })
+    
+    </script>
 </body>
 </html>

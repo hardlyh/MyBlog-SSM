@@ -61,5 +61,5 @@ public class UserController {
         ResultBO result = userService.updatePassword(user.getUsername(), password);
         return result;
     }
-
+    
 }

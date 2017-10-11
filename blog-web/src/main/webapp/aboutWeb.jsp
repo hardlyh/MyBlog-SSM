@@ -38,17 +38,18 @@
     
 
     <blockquote style="font-family: am-sans-serif;">
-
-      <h3><p>前段样式 : amaze UI </p></h3>
-      <h3> <p>图标样式 : amaze UI / bootstarp / 等</p><h3>
-      <h3><p>后台语言 : java </p><h3>  
+      <h3><p>前段样式 : Amaze UI </p></h3>
+      <h3> <p>图标样式 : Amaze UI / Bootstarp / 等</p><h3>
+      <h3><p>后台语言 : Java </p><h3>  
       <h3><p>后台框架 : Spring / SpringMVC / Mybatis (SSM) </p><h3>
-      <h3><p>辅助语言 : javascript , jQuery , css , html </p><h3>
-      <h3><p>后端样式 : bootstarp </p><h3>
+      <h3><p>辅助语言 : Javascript , JQuery , Css , Html </p><h3>
+      <h3><p>后端样式 : Nootstarp </p><h3>
       <h3><p>富文本编辑器 : wangEditor </p><h3>
-      <h3><p>服务器技术 : nginx </p><h3>
-      <h3><p>缓存 : redis </p><h3>
-      <h3><p>分布式(简单) : dubbo  zookeeper </p><h3>
+      <h3><p>服务器技术 : Nginx </p><h3>
+      <h3><p>缓存 : Redis </p><h3>
+      <h3><p>分布式(简单) : Dubbo  Zookeeper </p><h3>
+      <h3><p>消息中间件 : ActiveMq </p><h3>
+      <h3><p>定时任务 : Quarzt </p><h3>
       <h3><p>图片服务器 : 七牛云存储 </p><h3>
     </blockquote>
 

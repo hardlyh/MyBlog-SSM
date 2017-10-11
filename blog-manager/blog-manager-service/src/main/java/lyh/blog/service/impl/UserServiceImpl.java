@@ -13,6 +13,7 @@ import lyh.blog.pojo.BlogAdmin;
 import lyh.blog.pojo.BlogAdminQuery;
 import lyh.blog.pojo.BlogAdminQuery.Criteria;
 import lyh.blog.service.UserService;
+import lyh.blog.service.activemq.ActiveMqProduce;
 
 /**
 * @ClassName: UserServiceImpl
@@ -25,6 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BlogAdminMapper adminMapper;
+    
+
     
     /* 
      * 通过username查找对象
@@ -56,5 +59,7 @@ public class UserServiceImpl implements UserService {
             return ResultBO.error(e.getMessage());
         }
     }
+    
+
 
 }

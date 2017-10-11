@@ -12,7 +12,7 @@ public class BlogPage implements Serializable {
 
     private String pageHtmlUrl;
 
-    private Short pageViewingCount;
+    private Short pageViewingCount = 0;
 
     private Date gmtCreate;
 

@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/assets/vendor/linearicons/style.css">
 <link rel="stylesheet" href="/assets/vendor/toastr/toastr.min.css">
-<link rel="stylesheet" href="/assets/vendor/chartist/css/chartist-custom.css">
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="/assets/css/main.css">
 <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -22,109 +21,213 @@
 <!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 <!-- ICONS -->
-<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+<link rel="stylesheet" href="/assets/vendor/chartist/css/chartist-custom.css">
 <style type="text/css">
 </style>
+
 <body>
-	<!-- 页头 -->
-	<div id="wrapper">
-		<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="brand">
-			<a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
-		</div>
-		<div class="container-fluid">
-			<div class="navbar-btn">
-				<button type="button" class="btn-toggle-fullwidth">
-					<i class="lnr lnr-arrow-left-circle"></i>
-				</button>
-			</div>
-			<div id="navbar-menu">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="assets/img/user-medium.png" class="img-circle" alt="Avatar"> <span>${session.user.username }</span>
-							<i class="icon-submenu lnr lnr-chevron-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="myProfileAction_findMyProfile.action"><i class="lnr lnr-user"></i> <span>个人信息</span></a></li>
-							<li><a href="adminAction_updateOne"><i class="lnr lnr-cog"></i> <span>修改密码</span></a></li>
-							<li><a href="adminAction_quit" onclick="return confirm('是否注销');"><i class="lnr lnr-exit"></i> <span>注销</span></a></li>
-						</ul></li>
-				</ul>
-			</div>
-		</div>
-		</nav>
-		<div id="sidebar-nav" class="sidebar">
-			<div class="sidebar-scroll">
-				<nav>
-				<ul class="nav">
-					<li><a style="cursor:pointer;" id="index" class=""><i class="lnr lnr-home"></i> <span>主页</span></a></li>
-					<li><a style="cursor:pointer;" id="editPage" class=""><i class="lnr lnr-pencil"></i> <span>编辑新文章</span></a></li>
-					<li><a style="cursor:pointer;" id="tag" class=""><i class="lnr lnr-bookmark"></i> <span>标签管理</span></a></li>
-					<li><a style="cursor:pointer;" id="pageList" class=""><i class="lnr lnr-code"></i> <span>文章管理</span></a></li>
-					<li><a style="cursor:pointer;" id="profile" class=""><i class="lnr lnr-dice"></i> <span>个人信息</span></a></li>
-					<li><a style="cursor:pointer;" id="article" class=""><i class="lnr lnr-linearicons"></i> <span>网页管理</span></a></li>
-					<li><a style="cursor:pointer;" id="message" class=""><i class="lnr lnr-alarm"></i> <span>图片管理</span></a></li>
-					<li><a style="cursor:pointer;" id="archiving" class=""><i class="lnr lnr-text-format"></i> <span>文章归档</span></a></li>
-				</ul>
-				</nav>
-			</div>
-		</div>
+	<!-- WRAPPER --><div id="wrapper">
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-default navbar-fixed-top"> <%@ include file="nav.jsp"%> </nav>
+	<!-- END NAVBAR -->
+	<!-- LEFT SIDEBAR -->
+	<div id="sidebar-nav" class="sidebar">
+	   <%@ include file="siderbar-nav.jsp"%>
 	</div>
-	<!-- 包含内容  -->
-	<div class="embed-responsive embed-responsive-16by9">
-		<iframe class="embed-responsive-item" id="jumpPage" src="/admin/index2.html"> </iframe>
-	</div>
+	<!-- END LEFT SIDEBAR -->
+	<!-- MAIN -->
+	<div class="main"> 
+		<!-- MAIN CONTENT -->
+		<div class="main-content">
+			<div class="container-fluid">
+				<!-- OVERVIEW -->
+				<div class="panel panel-headline">
+					<div class="panel-heading">
+						<h3 class="panel-title">统计数据</h3>
+						<p class="panel-subtitle">Period: </p>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="metric">
+									<span class="icon"><i class="fa fa-eye" style="margin-top: 30%;"></i></span>
+									<p>
+										<span class="number">${infor.totalcount }</span> <span class="title">访问量</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="metric">
+									<span class="icon"><i class="fa fa-sun-o" style="margin-top: 30%;"></i></span>
+									<p>
+										<span class="number">${infor.todaycount }</span> <span class="title">日访问量</span>
+									</p>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="metric">
+									<span class="icon"><i class="fa fa-file-text-o" style="margin-top: 30%;"></i></span>
+									<p>
+										<span class="number">${infor.articlecount }</span> <span class="title">文章数</span>
+									</p>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="metric">
+									<span class="icon"><i class="fa fa-adjust" style="margin-top: 30%;"></i></span>
+									<p>
+										<span class="number">${privates }</span> <span class="title">私密文章</span>
+									</p>
+								</div>
+							</div>
+
+						</div>
 
 
-	<!-- 页脚 -->
-	<div class="clearfix"></div>
-	<footer>
-	<div class="container-fluid">
-		<p class="copyright">
-			&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a
-				href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-		</p>
-	</div>
-	</footer>
-	</div>
+						<div class="row">
 
-</body>
+
+							<div class="col-md-9" style="width: 80%; margin-left: 10%;">
+								<h3 class="panel-title">近五天访问人数</h3>
+								<br>
+								<div id="headline-chart" class="ct-chart"></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END OVERVIEW -->
+
+
+			<!-- TASKS -->
+			<!-- 
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">My Tasks</h3>
+									<div class="right">
+										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+									</div>
+								</div>
+								 -->
+
+
+ 
+			<div class="col-md-4" style="width: 80%; margin-left: 10%;">
+				<!-- VISIT CHART -->
+				<!--
+				<div class="panel">
+					<div class="panel-heading">
+						<h3 class="panel-title">文章占比</h3>
+						<div class="right">
+							<button type="button" class="btn-toggle-collapse">
+								<i class="lnr lnr-chevron-up"></i>
+							</button>
+							<button type="button" class="btn-remove">
+								<i class="lnr lnr-cross"></i>
+							</button>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="visits-chart" class="ct-chart"></div>
+					</div>
+				</div>
+				 -->
+				<!-- END VISIT CHART -->
+			</div>
+			</iframe>
+        </div>
+		</div>
+	</div>
+</div>
+<!-- END MAIN -->
+<!-- END WRAPPER -->
+<!-- Javascript-->
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="/assets/scripts/klorofil-common.js"></script>
 <script src="/assets/vendor/toastr/toastr.min.js"></script>
 <script src="/assets/vendor/chartist/js/chartist.min.js"></script>
-<!-- END WRAPPER -->
-<!-- Javascript -->
-
 <script>
-	$(function() {
-		
-		 var flag = "${empty flag}";  
-		    if(flag != "true" ){
-		        myPrompt('${flag}');
-		    }
-		    
-		
 		$("#index").addClass("active");
-		$("#index").click(function() {
-			$("#jumpPage").attr("src", "/admin/index2.html").ready();
-			$(".active").removeClass("active");
-			$("#index").addClass("active");
-		})
+		$(function() {
+			var ajaxdata;
+			
+			var labels;
+			
+			var labels1;
+			
+			var series;
+			
+			var series1;
+			
+			$.post("/admin/indexInfor",function(data){
+				<!-- -->
+				var data, options;
+				// headline charts
+				data = {
+					labels : data.time ,
+					series : [ data.amount ]
+				};
 
-		$("#editPage").click(function() {
-			$("#jumpPage").attr("src", "/admin/edit.html");
-			$(".active").removeClass("active");
-			$("#editPage").addClass("active");
-		})
-		
-		$("#tag").click(function() {
-            $("#jumpPage").attr("src", "/admin/tag.html");
-            $(".active").removeClass("active");
-            $("#tag").addClass("active");
-        })
+				options = {
+					height : 300,
+					showArea : true,
+					showLine : false,
+					showPoint : true,
+					fullWidth : false,
+					axisX : {
+						showGrid : false
+					},
+					lineSmooth : false,
+				};
 
-	});
-</script>
+				new Chartist.Line('#headline-chart', data, options);
+
+				
+				
+				// visits chart
+				
+			/*	data = {
+					labels:
+					series: [
+						
+					] 
+				};
+
+				options = {
+					height: 300,
+					axisX: {
+						showGrid: false
+					},
+				};
+
+			  new Chartist.Bar('#visits-chart', data, options);*/
+				
+				
+				
+				var updateInterval = 3000; // in milliseconds
+
+				setInterval(function() {
+					var randomVal;
+					randomVal = getRandomInt(0, 100);
+				}, updateInterval);
+
+				function getRandomInt(min, max) {
+					return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+
+			});
+			
+			
+		});
+	</script>
+</body>
+
 </html>

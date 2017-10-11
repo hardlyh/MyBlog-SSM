@@ -95,5 +95,17 @@ public class ArticleController {
         model.addAttribute("flag", "o");
         return "pageList";
     }
-
+    
+    
+    
+    
+    
+    @RequestMapping("/admin/privateArticle")
+    @ResponseBody
+    public PaginatorResult listPrivateArticle(Integer page, Integer row) {
+        if (page != null && row != null) {
+            return articleService.listPrivate(page, row);
+        }
+        return null;
+    }
 }

@@ -7,6 +7,6 @@ public interface UserService {
     
     BlogAdmin getByUsername(String username);
     ResultBO updatePassword(String username,String password);
-
+   
 }
 

@@ -27,8 +27,6 @@ public class IndexController {
      */
     @RequestMapping("/web/indexAndInfor.do")
     public String getIndexAndSetInformation(HttpSession httpSession){
-        BlogMyprofile profile = profileService.getProfileById((byte)1);
-        httpSession.setAttribute("myprofile", profile);
         return "redirect:/lw-index.html";
     }
 

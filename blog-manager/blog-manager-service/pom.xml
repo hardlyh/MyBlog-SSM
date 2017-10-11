@@ -8,7 +8,6 @@
 	</parent>
 	<artifactId>blog-manager-service</artifactId>
 	<packaging>war</packaging>
-
 	<dependencies>
 		<dependency>
 			<groupId>blog.lyh</groupId>
@@ -21,10 +20,25 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- jedis -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>${jedis.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+		<!-- activemq -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- quartz -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+		</dependency>
 	</dependencies>
 </project>

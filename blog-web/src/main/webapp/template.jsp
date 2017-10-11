@@ -23,12 +23,6 @@
   <meta name="msapplication-TileColor" content="#0e90d2">
   <link rel="stylesheet" href="assets/css/amazeui.min.css">
   <link rel="stylesheet" href="assets/css/app.css">
-  <style type="text/css">
-   li{
-        list-style:none;
-        line-height:30px;
-   }
-  </style>
 </head>
 
 <body id="blog-article-sidebar">
@@ -41,52 +35,35 @@
     <div class="am-u-md-8 am-u-sm-12">
       <article class="am-article blog-article-p">
         <div class="am-article-hd">
-          <h1 class="am-article-title blog-text-center">文章存档</h1>
+          <h1 class="am-article-title blog-text-center">${page.pageTitle }</h1>
           <p class="am-article-meta blog-text-center">
-              <span><a href="#" class="blog-color">article &nbsp;</a></span>
-              <span><a href="#">@myself &nbsp;</a></span>
+              <span><a href="#" class="blog-color">article &nbsp;</a></span>-
+              <span><a href="#">@myself &nbsp;</a></span>-
+              <span><a href="#">${page.gmtModified}</a></span>
           </p>
-          <ul>
-             <li>
-                 <span class="am-u-sm-4 am-u-md-2 timeline-span"><b>Time</b></span>
-                 <span class="am-u-sm-8 am-u-md-6"><a href="#" ><b>Title</b></a></span>
-                 <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only"><b>Tag</b></span>  
-                 <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only"><b>View</b></span>
-              </li>
-          </ul>
-          <br>
-          <hr>
-          <ul id="ul_clone">
-	          <div style="display:none">
-	             <li id="li_clone">
-	                <span class="am-u-sm-4 am-u-md-2 timeline-span">2015/10/18</span>
-	                <span class="am-u-sm-8 am-u-md-6"><a href="#" name="title">君埋泉下泥销骨，我寄人间雪满头</a></span>
-	                <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only" name="tag">lyh</span>  
-	                <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only" name="proview">ss</span>
-	              </li>
-              </div>
-          </ul>
         </div>        
         <div class="am-article-bd">
+        <#if page.pageImgurl??>
+         <img src="admin/assets/page_img/${page.pageImgurl}" alt="" class="blog-entry-img blog-article-margin">          
+        </#if>
+        <p class="class="am-article-lead"">
+       
+          ${content }
+   
         </p>
         </div>
       </article>
         
         <div class="am-g blog-article-widget blog-article-margin">
           <div class="am-u-lg-4 am-u-md-5 am-u-sm-7 am-u-sm-centered blog-text-center">
-            <span class="am-icon-tags"> &nbsp;</span><a href="#">命中含笑m</a>
+            <span class="am-icon-tags"> &nbsp;</span><a href="#">标签</a> , <a href="#">${page.pageTag }</a> 
             <hr>
+            
           </div>
         </div>
-
-    
-
-        
-
         <hr>
     </div>
 
-   
      <%@include file="left.jsp" %>
 </div>
 <!-- content end -->
@@ -109,19 +86,6 @@
 <script type="text/javascript">
 	$("#pageList").addClass("am-active");
 	
-	$.post('/web/timelineArticle.do',function(data){
-		if(data!=null){
-			for(var i=0;i<data.length;i++){
-				var li = $("#li_clone").clone(false);
-				$(li).find(".timeline-span").text(data[i].gmtModified);
-				$(li).find("a[name='title']").text(data[i].pageTitle);
-			//	$(li).find("a[name='title']").attr('href',data[i].pageHtmlUrl);
-				$(li).find("span[name='tag']").text(data[i].pageTag);
-				$(li).find("span[name='proview']").text(data[i].pageViewingCount);
-				$("#ul_clone").append(li);
-			}
-		}
-	})
 	
 	</script>
 </body>

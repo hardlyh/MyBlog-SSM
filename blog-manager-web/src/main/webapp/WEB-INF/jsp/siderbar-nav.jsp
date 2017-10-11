@@ -9,8 +9,8 @@
 			<li><a id="tag" href="/admin/tag.html" class=""><i class="lnr lnr-bookmark"></i> <span>标签管理</span></a></li>
 			<li><a id="pageList" href="/admin/pageList.html" class=""><i class="lnr lnr-code"></i> <span>文章管理</span></a></li>
 			<li><a id="profile" href="/admin/getProfile" class="" ><i class="lnr lnr-dice"></i> <span>个人信息</span></a></li>
-			<li><a id="article" href="articleAction_findAllArticle" class=""><i class="lnr lnr-linearicons"></i> <span>网页管理</span></a></li>
-			<li><a id="message" href="webmanage.jsp" class=""><i class="lnr lnr-alarm"></i> <span>图片管理</span></a></li>
+			<li><a id="article" href="/404" class=""><i class="lnr lnr-linearicons"></i> <span>网页管理</span></a></li>
+			<li><a id="pageprivateList" href="/admin/pageprivateList.html" class=""><i class="lnr lnr-linearicons"></i> <span>私密文章</span></a></li>
 		</ul>
 	</nav>
 </div>

@@ -44,19 +44,15 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">标签管理</h3>
-							<p class="panel-subtitle">Period: tag_message .</p>
-						</div>
-						<div class="panel-body">
+                                    <h3 class="panel-title">所有文章:</h3>
+                                </div>
+
+                                <div class="panel-body">
 
 							<div style="width: 80%; margin: 0 auto;">
 
 
-								<div class="panel-heading">
-									<h3 class="panel-title">所有文章:</h3>
-								</div>
-
-								<div class="panel-body">
+								
 									<!-- 主要内容 -->
 									<table class="table">
 									 <colgroup>

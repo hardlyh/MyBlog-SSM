@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
-	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
-	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 	
 	<!-- 配置包扫描器 -->
 	<context:component-scan base-package="lyh.blog.service"/>
@@ -22,14 +26,41 @@
 	<dubbo:service interface="lyh.blog.service.CategoryService" ref="categoryServiceImpl" timeout="30000"/>
 	<dubbo:service interface="lyh.blog.service.ProfileService" ref="profileServiceImpl" timeout="30000"/>
 	<dubbo:service interface="lyh.blog.service.UserService" ref="userServiceImpl" timeout="30000"/>
-	
+	<dubbo:service interface="lyh.blog.service.WebInfomationService" ref="webInformationServiceImpl" timeout="30000"/>
 	<!-- 声明需要暴露的服务接口 -->
 	<!-- jedis -->
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-		<constructor-arg name="host" value="127.0.0.1"></constructor-arg>
-		<constructor-arg name="port" value="6379"></constructor-arg>
+		<constructor-arg name="host" value="127.0.0.1">
+		</constructor-arg>
+		<constructor-arg name="port" value="6379">
+		</constructor-arg>
 	</bean>
 	
 	<bean id="jedisClientPool" class="lyh.blog.service.redis.JedisClientPool"/>
+	
+	<!-- quartz -->
+	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 注入目标对象 -->
+		<property name="targetObject" ref="fixTimeJob"/>
+		<!-- 注入目标方法 -->
+		<property name="targetMethod" value="send"/>
+	</bean>
+	<!-- 配置触发器 -->
+	<bean id="myTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<!-- 注入任务详情对象 -->
+		<property name="jobDetail" ref="jobDetail"/>
+		<!-- 注入cron表达式，通过这个表达式指定触发的时间点 -->
+		<property name="cronExpression">
+			<value>0 0 0/2 * * ?</value>
+		</property>
+	</bean>
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 注入触发器 -->
+		<property name="triggers">
+			<list>
+				<ref bean="myTrigger"/>
+			</list>
+		</property>
+	</bean>
 	
 </beans>

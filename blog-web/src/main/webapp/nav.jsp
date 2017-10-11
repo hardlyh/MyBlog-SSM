@@ -43,12 +43,9 @@
 	        <ul class="am-dropdown-content" id="category">
 	        </ul>
         </li>
-		<li id="timeline"><a href="template.html">存档</a></li>
-		<li><a href="webPageAction_getArticle">知识整理</a></li>
+		<li id="timeline"><a href="lw-timeline.html">存档</a></li>
+		<!-- <li><a href="webPageAction_getArticle">知识整理</a></li> -->
 		<li id="aboutWeb"><a href="aboutWeb.jsp">关于本站</a></li>
-		<c:if test="${!empty user}">
-			<li id="privateList"><a href="webPageAction_findByPrivate">私密文章</a></li>
-		</c:if>
 	</ul>
 	<form class="am-topbar-form am-topbar-right am-form-inline" id="conditionForm" role="search" method="post" action="webPageAction_condition">
 		<div class="am-form-group">

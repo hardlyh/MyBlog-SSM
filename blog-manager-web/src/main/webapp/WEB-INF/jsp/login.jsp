@@ -36,7 +36,7 @@
 							<div class="header">
 								<div class="logo text-center"><img src="/assets/img/logo-dark.png" alt="Klorofil Logo"></div>
 								<p class="lead">Login to your account</p>
-							</div>
+							</div>   
 							<form class="form-auth-small" action="/admin/login" method="post">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">用户名</label>
@@ -62,8 +62,8 @@
 					<div class="right">
 						<div class="overlay"></div>
 						<div class="content text">
-							<h1 class="heading">Free Bootstrap dashboard template</h1>
-							<p>by The Develovers</p>
+							<h1 class="heading">lyh BLOG后台管理</h1>
+							<p>by The Lyh</p>
 						</div>
 					</div>
 					<div class="clearfix"></div>

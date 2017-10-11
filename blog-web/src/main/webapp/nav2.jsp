@@ -43,12 +43,9 @@
 	        <ul class="am-dropdown-content" id="category">
 	        </ul>
         </li>
-		<li id="timeline"><a href="template.html">存档</a></li>
-		<li><a href="webPageAction_getArticle">知识整理</a></li>
-		<li id="aboutWeb"><a href="aboutWeb.jsp">关于本站</a></li>
-		<c:if test="${!empty user}">
-			<li id="privateList"><a href="webPageAction_findByPrivate">私密文章</a></li>
-		</c:if>
+		<li id="timeline"><a href="lw-timeline.html">存档</a></li>
+		<!-- <li><a href="webPageAction_getArticle">知识整理</a></li> -->
+		<li id="aboutWeb"><a href="aboutWeb.html">关于本站</a></li>
 	</ul>
 	<form class="am-topbar-form am-topbar-right am-form-inline" id="conditionForm" role="search" method="post" action="webPageAction_condition">
 		<div class="am-form-group">
@@ -74,7 +71,7 @@ $(function(){
             $(v).find(".viewCount").text("阅读 : "+data[i].pageViewingCount);
             $(v).find(".tag").text("  "+data[i].pageTag);
             $(v).find(".articleId").text(data[i].id);
-            $(v).find(".url_title").attr("href",data[i].pageHtmlUrl);
+            $(v).find(".url_title").attr("href","/article/"+data[i].pageHtmlUrl+".html");
             $(v).find(".url_title").text(data[i].pageTitle);
             $(v).find(".description").text(data[i].pageDescription);
             $("#contentByajax").append(v);

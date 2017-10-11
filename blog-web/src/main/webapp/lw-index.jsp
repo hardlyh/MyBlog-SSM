@@ -70,10 +70,6 @@
 	</div>
 	
 	<!-- content end -->
-      
-   
-
-
     <!-- 样本文章块 -->
     <div style="display:none;">
            <article class="am-g blog-entry-article" id="example">

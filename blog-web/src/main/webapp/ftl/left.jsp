@@ -5,9 +5,9 @@
 <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
 			<div class="blog-sidebar-widget blog-bor">
 				<h2 class="blog-text-center blog-title">
-					<span>name</span>
+					<span>${myprofile.name }</span>
 				</h2>
-				<img alt="about me" class="blog-entry-img">
+				<img alt="about me" src="${myprofile.headPortraitUrl }" class="blog-entry-img">
 				<p><b>age : ${myprofile.age }</b></p>
 				<p><b>email : ${myprofile.email }</b></p>
 				<p><b>web_url : ${myprofile.mywebUrl }</b></p>
@@ -21,15 +21,18 @@
 	                <a href="${myprofile.weibo }" target="_blank"><span class="am-icon-weibo am-icon-fw blog-icon" ></span></a>
 	             </p>
 			</div>
-		<!-- <div class="blog-sidebar-widget blog-bor">
+			
+			
+
+		    <div class="blog-sidebar-widget blog-bor">
 				<h2 class="blog-title">
 					<span>推荐文章</span>
 				</h2>
 				<ul class="am-list">
-				<c:forEach items="${session.listPage }" var="lp">
-					 <li><a href="${lp.htmlUrl }.jsp">${lp.title }(${lp.pageview })</a></li>
-				 </c:forEach>
+				 <#list listPage as lp>
+                      <li><a href="/article/${lp.pageHtmlUrl }.html">${lp.pageTitle }(${lp.pageViewingCount })</a></li>
+                </#list>
                
 				</ul>
-			</div> -->   
+			</div>   
 		</div>

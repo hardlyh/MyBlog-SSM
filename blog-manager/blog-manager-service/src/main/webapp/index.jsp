@@ -8,7 +8,7 @@
 </head>
 <body>
 
-qidongcheng
+<a href="/mq/send">q</a>
 
 </body>
 </html>
