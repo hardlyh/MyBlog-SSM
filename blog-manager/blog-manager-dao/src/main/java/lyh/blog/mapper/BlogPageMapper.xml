@@ -291,4 +291,11 @@
       page_description = #{pageDescription,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 根据点击量查询  -->
+  <select id="selectByCountview" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from blog_page
+  	where page_is_private=0 ORDER BY page_viewing_count DESC limit 0,5;
+  </select>
 </mapper>

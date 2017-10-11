@@ -27,4 +27,6 @@ public interface BlogPageMapper {
     int updateByPrimaryKeySelective(BlogPage record);
 
     int updateByPrimaryKey(BlogPage record);
+    
+    List<BlogPage> selectByCountview();
 }
